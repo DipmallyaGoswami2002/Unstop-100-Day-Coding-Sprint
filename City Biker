@@ -1,0 +1,36 @@
+Problem Statement :
+Once upon a time, a city biker embarked on an exciting road trip. This journey was laid out across a sequence of n+1 points, each with varying altitudes. The biker's adventure commenced at point 0, where the altitude was a humble 0 meters above sea level.
+
+During his expedition, he encountered different terrains. For every segment between points i and i+1, where 0≤i<n, the biker faced varying challenges in altitude. Each segment was represented by an integer array called gain of length n, where gain[i] denoted the net gain in altitude between points i and i+1.
+
+The biker's goal was to find the highest altitude he reached during his journey. This altitude was determined by the net gain in altitude at each point along the way. It could be a thrilling peak or a serene valley, depending on the varying gains between consecutive points.
+
+Solution :
+
+// Code
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    if (!(cin >> n)) return 0;
+
+    int current_altitude = 0;
+    int max_altitude = 0;
+
+    for (int i = 0; i < n; ++i) {
+        int gain;
+        cin >> gain;
+        current_altitude += gain;
+        max_altitude = max(max_altitude, current_altitude);
+    }
+    cout << max_altitude << endl;
+    return 0;
+}
