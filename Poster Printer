@@ -1,0 +1,62 @@
+Problem Statement : A printing press in DiceCity uses a special machine to print colors on blank sheets of paper. The machine operates on pairs of neighboring sheets and can print in one of two color combinations:
+
+"BR": Sets two neighboring sheets to blue (B) and red (R).
+"RB": Sets two neighboring sheets to red (R) and blue (B).
+Each operation overwrites the colors of the chosen adjacent pair, regardless of their current colors.
+
+Solution : 
+ // code
+
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    bool possible = true;
+    int i = 0;
+
+    while (i < n) {
+        if (s[i] == 'W') {
+            i++;
+            continue;
+        }
+        bool has_R = false;
+        bool has_B = false;
+
+        while (i < n && s[i] != 'W') {
+            if (s[i] == 'R') has_R = true;
+            if (s[i] == 'B') has_B = true;
+            i++;      
+              }
+    
+    if (!has_R || !has_B) {
+        possible = false;
+        break;
+    }
+}
+if (possible) {
+    cout << "YES\n";
+} else {
+    cout << "NO\n";
+}
+}
+int main () {
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL);
+
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
+
+
