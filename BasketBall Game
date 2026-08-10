@@ -1,0 +1,58 @@
+Problem Satement : 
+In a peculiar basketball game, where World Cup is happening, Aniket is tasked with keeping the scores of the match. The game unfolds in rounds, and with each rounds there is a system like the matches played previously will be highlighted in future scores too i.e where the scores of previous rounds can influence those in the future.
+
+Aniket starts each game with an null record.
+
+He is provided with a list of operations, represented by strings, denoted as 'ops'.
+
+Each operation, 'ops[i]', can be one of the following:
+
+An integer 'x', indicating the recording of a new score 'x'.
+A '+', which means recording a score that is the sum of the previous two scores (it is ensured that there are always at least two previous scores available).
+A 'D', signifying recording a score that is double the previous score (it is ensured that there is always a previous score available).
+A 'C', indicating the invalidation of the previous score, removing it from the record (it is ensured that there is always a previous score to remove).
+Aniket's task is to process these operations and calculate the sum of all the scores and keep record of it for the final judgement.
+
+Solution :
+// Code 
+#include <iostream>
+#include <vector>
+#include <string>
+#include <numeric>
+
+using namespace std;
+
+int calPoints(vector<string>& ops) {
+    vector<int> record;
+
+    for (const string& op : ops) {
+        if (op == "+") {
+            int n = record.size();
+
+            record.push_back(record[n - 1] + record[n - 2]);
+        } else if (op == "D"){
+            record.push_back(2 * record.back());
+        } else if (op == "C") {
+            record.pop_back();
+        } else {
+            record.push_back(stoi(op));
+        }
+    }
+    int totalSum = 0;
+    for (int score : record) {
+        totalSum += score;
+    }
+    return totalSum;
+}
+
+int main() {
+    int n;
+    if (!(cin >> n)) return 0;
+
+    vector<string> ops(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> ops[i];
+    }
+    cout << calPoints(ops) << endl;
+    return 0;
+}
